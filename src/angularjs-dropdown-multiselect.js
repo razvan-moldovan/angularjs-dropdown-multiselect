@@ -192,9 +192,13 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                                 }
                             });
 
-                            if ($scope.selectedModel.length > $scope.settings.smartButtonMaxItems) {
-                                itemsText = itemsText.slice(0, $scope.settings.smartButtonMaxItems);
-                                itemsText.push('...');
+                            if ($scope.settings.showAllCount && $scope.selectedModel.length === $scope.options.length) {
+                                return $scope.texts.allSelectedText;
+                            } else {
+                                if ($scope.selectedModel.length > $scope.settings.smartButtonMaxItems) {
+                                    itemsText = itemsText.slice(0, $scope.settings.smartButtonMaxItems);
+                                    itemsText.push('...');
+                                }
                             }
 
                             return itemsText.join(', ');

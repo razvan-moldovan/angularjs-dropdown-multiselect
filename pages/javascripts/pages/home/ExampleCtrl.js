@@ -167,4 +167,12 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
     showAllCount: true
   };
 
+  $scope.example17settings = {
+    showAllCount: true,
+    smartButtonMaxItems: 1,
+    smartButtonTextConverter: function(itemText, originalItem) {
+      return itemText + ' is my name';
+    }
+  };
+
 }]);
