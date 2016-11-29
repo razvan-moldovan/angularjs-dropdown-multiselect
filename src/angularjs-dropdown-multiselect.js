@@ -56,7 +56,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
             },
             link: function ($scope, $element, $attrs) {
                 var $dropdownTrigger = $element.children()[0];
-                
+
                 $scope.toggleDropdown = function () {
                     $scope.open = !$scope.open;
                 };
@@ -93,7 +93,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                     groupBy: $attrs.groupBy || undefined,
                     groupByTextProvider: null,
                     smartButtonMaxItems: 0,
-                    smartButtonTextConverter: angular.noop
+                    smartButtonTextConverter: angular.noop,
+                    showAllCount: false
                 };
 
                 $scope.texts = {
@@ -103,7 +104,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                     selectionOf: '/',
                     searchPlaceholder: 'Search...',
                     buttonDefaultText: 'Select',
-                    dynamicButtonTextSuffix: 'checked'
+                    dynamicButtonTextSuffix: 'checked',
+                    allSelectedText: 'All selected'
                 };
 
                 $scope.searchFilter = $scope.searchFilter || '';
@@ -208,7 +210,11 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                             if (totalSelected === 0) {
                                 return $scope.texts.buttonDefaultText;
                             } else {
-                                return totalSelected + ' ' + $scope.texts.dynamicButtonTextSuffix;
+                                if (!$scope.singleSelection && $scope.settings.showAllCount && totalSelected === $scope.options.length) {
+                                    return $scope.texts.allSelectedText;
+                                } else {
+                                    return totalSelected + ' ' + $scope.texts.dynamicButtonTextSuffix;
+                                }
                             }
                         }
                     } else {
