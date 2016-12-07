@@ -197,7 +197,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                             } else {
                                 if ($scope.selectedModel.length > $scope.settings.smartButtonMaxItems) {
                                     itemsText = itemsText.slice(0, $scope.settings.smartButtonMaxItems);
-                                    itemsText.push('...');
+                                    if($scope.settings.smartButtonMaxItems !== 1 && !$scope.settings.showAllCount) {
+                                      itemsText.push('...');
+                                    }
                                 }
                             }
 

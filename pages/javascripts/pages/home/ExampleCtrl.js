@@ -171,7 +171,7 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
     showAllCount: true,
     smartButtonMaxItems: 1,
     smartButtonTextConverter: function(itemText, originalItem) {
-      return itemText + ' is my name';
+      return $scope.example16model.length + ' name' + ($scope.example16model.length != 1 ? 's' : '')
     }
   };
 
